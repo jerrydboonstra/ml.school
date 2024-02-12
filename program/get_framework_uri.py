@@ -11,7 +11,7 @@ config = {
 # Call the retrieve function for scikit-learn framework in us-east-2 region
 framework_uri = retrieve(
     framework='sklearn',  # Use 'sklearn' for scikit-learn
-    version='0.23-1',  # Specify the scikit-learn version you want to use
+    version='1.2-1',  # Specify the scikit-learn version you want to use
     region=config["session"]["boto_region_name"]  # This will use "us-east-2"
 )
 
