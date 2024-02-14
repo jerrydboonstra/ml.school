@@ -10,7 +10,7 @@ export class MlSchoolStack extends cdk.Stack {
     const lambdaFunction = new lambda.Function(this, 'ModelAccuraccyLambdaFunction', {
       runtime: lambda.Runtime.PYTHON_3_9,
       handler: 'model_accuracy_lambda.lambda_handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, './src')),
+      code: lambda.Code.fromAsset(path.join(__dirname, './../src')),
       environment: {
         // Environment variables (if any)
       }
