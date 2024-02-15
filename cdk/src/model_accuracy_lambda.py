@@ -7,15 +7,30 @@ def lambda_handler(event, context):
     
     # Specify your Model Package Group Name
     model_package_group_name = "penguins"
-    
+
     # Get the list of model packages
-    response = sagemaker_client.list_model_packages(ModelPackageGroupName=model_package_group_name, SortBy='CreationTime', SortOrder='Descending', MaxResults=1)
+    response = sagemaker_client.list_model_packages(
+        ModelPackageGroupName=model_package_group_name, 
+        SortBy='CreationTime', 
+        SortOrder='Descending', 
+        MaxResults=1
+    )
+
+    # Allow setting a default value to bootstrap the system
+    #  Extract best_model_accuracy_default from the event object
+    best_model_accuracy_default = float(event.get('best_model_accuracy_default', 0.0))
     
     if not response['ModelPackageSummaryList']:
-        return {
-            'statusCode': 404,
-            'body': json.dumps('No model packages found in the specified group.')
-        }
+        if best_model_accuracy_default > 0.0:
+            return {
+                'statusCode': 200,
+                'body': json.dumps({'best_model_accuracy': best_model_accuracy_default})
+            }
+        else:
+            return {
+                'statusCode': 404,
+                'body': json.dumps('No model packages found in the specified group.')
+            }
     
     # Assuming the latest model package is the first one in the sorted list
     latest_model_package_arn = response['ModelPackageSummaryList'][0]['ModelPackageArn']
