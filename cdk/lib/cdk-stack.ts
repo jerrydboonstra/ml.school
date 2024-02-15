@@ -19,10 +19,10 @@ export class CdkStack extends cdk.Stack {
       effect: iam.Effect.ALLOW,
       resources: ['*'], // Restrict as necessary
       actions: [
-        // 'sagemaker:*', // Restrict as necessary based on your Lambda's needs
-        'sagemaker:ListModels',
-        'sagemaker:DescribeModelPackages',
-        'sagemaker:GetModelPackage',
+        'sagemaker:*', // Restrict as necessary based on your Lambda's needs
+        // 'sagemaker:ListModels',
+        // 'sagemaker:DescribeModelPackages',
+        // 'sagemaker:GetModelPackage',
       ],
     }));
 
