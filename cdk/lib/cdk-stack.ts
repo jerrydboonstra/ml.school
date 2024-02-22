@@ -14,6 +14,8 @@ export class CdkStack extends cdk.Stack {
       description: 'Role for Lambda to access SageMaker and other services',
     });
 
+    lambdaExecutionRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaBasicExecutionRole'));
+
     // Add SageMaker access policy
     lambdaExecutionRole.addToPolicy(new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
